@@ -82,3 +82,249 @@ Comprobamos en la nueva base de datos si tenemos los datos de las tablas nuevas:
 ![grupal5](https://github.com/FranHuzon/Practica_Movimiento_de_datos/blob/master/images/grupal5.png)
 
 Solamente hemos podido bajar el número de errores a 15, lo cúal es bastante aceptable. Algunos de los errores son porque ya existía el objeto que se está importando, y otros, básicamente, no hemos sido capaces de arreglarlos.
+
+
+### 3. SQL\*Loader es una herramienta que sirve para cargar grandes volúmenes de datos en una instancia de ORACLE. Exportad los datos de uno de vuestros proyectos de 1º desde Postgres a texto plano con delimitadores y emplead SQL\*Loader para realizar el proceso de carga de dichos datos a una instancia ORACLE. Debéis explicar los distintos ficheros de configuración y de log que tiene SQL\*Loader.
+
+
+Vamos a exportar los datos de unas tablas en una base de datos postgresql a un fichero _.dat_.
+
+**NOTA:** Al ser el proceso muy repetitivo, se ha decidido realizar la exportación y la importación de 3 tablas.
+
+Realizamos la exportación desde postgresql:
+
+![grupal6](https://github.com/FranHuzon/Practica_Movimiento_de_datos/blob/master/images/grupal6.png)
+
+Fichero usuarios.dat:
+
+![grupal7](https://github.com/FranHuzon/Practica_Movimiento_de_datos/blob/master/images/grupal7.png)
+
+
+Fichero servicios.dat:
+
+![grupal8](https://github.com/FranHuzon/Practica_Movimiento_de_datos/blob/master/images/grupal8.png)
+
+Fichero versionesso:
+
+![grupal9](https://github.com/FranHuzon/Practica_Movimiento_de_datos/blob/master/images/grupal9.png)
+
+
+Comprobación de los ficheros:
+
+
+
+Ahora nos vamos a nuestro equipo con oracle, donde debemos crear un fichero de control por cada tabla. Sería algo parecido a lo siguiente:
+
+- Fichero servicios.ctl
+~~~
+LOAD DATA
+INSERT
+INTO TABLE servicios
+(
+Nombre CHAR TERMINATED BY ',',
+Descripcion CHAR TERMINATED BY 'chr(10)'
+)
+~~~
+- Fichero usuarios.ctl:
+~~~
+LOAD DATA
+INSERT
+INTO TABLE usuarios
+(
+Nombre CHAR TERMINATED BY ',',
+Contrasena CHAR TERMINATED BY ',',
+NombreReal CHAR TERMINATED BY ',',
+Apellidos CHAR TERMINATED BY ',',
+CorreoElectronico CHAR TERMINATED BY ',',
+Ciudad CHAR TERMINATED BY 'chr(10)'
+)
+~~~
+- Fichero versionesso.ctl:
+~~~
+LOAD DATA
+INSERT
+INTO TABLE versionesso
+(
+Codigo CHAR TERMINATED BY ',',
+Nombre CHAR TERMINATED BY 'chr(10)'
+)
+~~~
+
+Realizamos la importación en la base de datos oracle:
+
+- Tabla Servicios:
+
+~~~
+oracle@OracleJessie:~/carga_datos$ sqlldr fran/fran control=control_files/servicios.ctl data=datos/servicios.dat log=logs/servicios.log
+
+SQL*Loader: Release 12.1.0.2.0 - Production on Jue Mar 5 20:06:38 2020
+
+Copyright (c) 1982, 2014, Oracle and/or its affiliates.  All rights reserved.
+
+Ruta de acceso utilizada:      Convencional
+Punto de confirmación alcanzado - recuento de registros lógicos 7
+
+Tabla SERVICIOS:
+  7 Filas se ha cargado correctamente.
+
+Consulte el archivo log:
+  logs/servicios.log
+para obtener más información sobre la carga.
+~~~
+
+- Tabla Usuarios:
+
+~~~
+oracle@OracleJessie:~/carga_datos$ sqlldr fran/fran control=control_files/usuarios.ctl data=datos/usuarios.dat log=logs/usuarios.log
+
+SQL*Loader: Release 12.1.0.2.0 - Production on Jue Mar 5 20:02:50 2020
+
+Copyright (c) 1982, 2014, Oracle and/or its affiliates.  All rights reserved.
+
+Ruta de acceso utilizada:      Convencional
+Punto de confirmación alcanzado - recuento de registros lógicos 7
+
+Tabla USUARIOS:
+  7 Filas se ha cargado correctamente.
+
+Consulte el archivo log:
+  logs/usuarios.log
+para obtener más información sobre la carga.
+~~~
+
+- Tabla Versionesso:
+
+~~~
+oracle@OracleJessie:~/carga_datos$ sqlldr fran/fran control=control_files/versionesso.ctl data=datos/versionesso.dat log=logs/versionesso.log
+
+SQL*Loader: Release 12.1.0.2.0 - Production on Jue Mar 5 20:08:58 2020
+
+Copyright (c) 1982, 2014, Oracle and/or its affiliates.  All rights reserved.
+
+Ruta de acceso utilizada:      Convencional
+Punto de confirmación alcanzado - recuento de registros lógicos 10
+
+Tabla VERSIONESSO:
+  10 Filas se ha cargado correctamente.
+
+Consulte el archivo log:
+  logs/versionesso.log
+para obtener más información sobre la carga.
+~~~
+
+Comprobamos que los datos se han insertado correctamente en las tablas:
+
+~~~
+oracle@OracleJessie:~/carga_datos$ rlwrap sqlplus fran/fran
+
+SQL*Plus: Release 12.1.0.2.0 Production on Jue Mar 5 20:06:42 2020
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+Hora de Última Conexión Correcta: Jue Mar 05 2020 20:06:38 +01:00
+
+Conectado a:
+Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, OLAP, Advanced Analytics and Real Application Testing options
+
+
+Sesión modificada.
+
+SQL> select * from servicios;
+
+NOMBRE			  | DESCRIPCION
+_________________________ | ________________________________________________________________________________________________________________________
+Correo                    | Presta servicio de correo electrónico entre servidores usando el protocolo SMTP.
+Web			  | Recibe peticiones de un cliente y proporciona una respuesta rederizada en un navegador web usando el protocolo HTTP.
+DHCP                      | Asigna direcciones IP al resto de máquinas de forma automática.
+Base de datos             | Almacena\, modifica y extrae información de la base de datos.
+Seguridad		  | Protege el sistema de intrusiones no deseadas.
+FTP                       | Permite el desplazamiento de datos entre diferentes máquinas.
+SSH                       | Controla las líneas de módem de la red para que las peticiones conecten con la red de una posición remota.
+
+7 filas seleccionadas.
+
+SQL> 
+
+
+oracle@OracleJessie:~/carga_datos$ rlwrap sqlplus fran/fran
+
+SQL*Plus: Release 12.1.0.2.0 Production on Jue Mar 5 20:02:54 2020
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+Hora de Última Conexión Correcta: Jue Mar 05 2020 20:02:50 +01:00
+
+Conectado a:
+Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, OLAP, Advanced Analytics and Real Application Testing options
+
+
+Sesión modificada.
+
+SQL> select * from usuarios;
+
+NOMBRE		         | CONTRASENA	        | NOMBREREAL	       | APELLIDOS
+____________________ | ____________________ | ____________________ | ________________________________________
+CORREOELECTRONICO	 | CIUDAD
+________________________________________    | ____________________
+paco.garcia          | 1234567890           | Francisco            | García Fernández
+pacog1@hotmail.es	 | Lagos (Portugal)
+
+josedom24            | 1a2b3c4d5e           | Jose Domingo         | Muñoz Rodríguez
+josedom24@gmail.com                         | Utrera (España)
+
+rruizpadi            | M@ri@DB4ever         | Raúl                 | Ruiz Padilla
+rruiz@gmail.com                             | Sevilla (España)
+
+AnAcLeTo	         | b1c1clet@s	        | Rodrigo		       | Moreno Ruedas
+rodrimorerue@netmail.net                    | París (Francia)
+
+pepe perez           | 23-junio-85          | Juan                 | Pérez Pérez
+eldeejemplo@orgmail.org 		            | Portimao (Portugal)
+
+juana_la_loca        | felipe_hermoso_mio   | Juana                | Princesa Católica
+juana@edumail.edu                           | Aragón (España)
+
+Rosa_FOL             | @@@ROSA@@@           | Rosa                 | López de España
+eurovision@infomail.info                    | Teruel (España)
+
+
+7 filas seleccionadas.
+
+SQL>
+
+
+oracle@OracleJessie:~/carga_datos$ rlwrap sqlplus fran/fran
+
+SQL*Plus: Release 12.1.0.2.0 Production on Jue Mar 5 20:09:06 2020
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+Hora de Última Conexión Correcta: Jue Mar 05 2020 20:08:58 +01:00
+
+Conectado a:
+Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, OLAP, Advanced Analytics and Real Application Testing options
+
+Sesión modificada.
+
+SQL> select * from versionesso;
+
+CODIGO		| NOMBRE
+_______________ | ____________________
+Debian9.0	| Debian Stretch
+Debian8.0	| Debian Jessie
+WXP		| Windows Xp
+W7		| Windows Siete
+W10		| Windows Diez
+WS2003		| Windows Server
+WS2012		| Windows Server
+WS2016		| Windows Server
+Fedora22	| Fedora
+CentOS7 	| Cent Os
+
+10 filas seleccionadas.
+
+SQL> 
+~~~
