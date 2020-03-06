@@ -344,6 +344,7 @@ Respecto a los ficheros de configuración todos tienen la misma estructura y es 
 Contiene los datos a importar de la tabla que previamente se ha exportado.
 
 ### logfile
+Estos ficheros muestran información de las acciones que se han ido haciendo durante el proceso de importación, como por ejemplo, nombre del controlfile, nombre del datafile, la estructura de la tabla importada, número de errores producidos y su causa, el tiempo que ha tardado en realizar la acción, así como otros datos.
 
 Aquí tenemos los 3 ficheros de logs que hemos generado:
 
@@ -464,5 +465,3 @@ La ejecución terminó en Jue Mar 05 20:08:58 2020
 Tiempo transcurrido:     00:00:00.07
 Tiempo de CPU:         00:00:00.02
 ~~~
-
-Estos ficheros muestran información de las acciones que se han ido haciendo durante el proceso de importación, como por ejemplo, nombre del controlfile, nombre del datafile, la estructura de la tabla importada, número de errores producidos y su causa, el tiempo que ha tardado en realizar la acción, así como otros datos.
