@@ -25,13 +25,13 @@ SQL>
 
 Exportamos la estructura y los datos de las tablas de SCOTT:
 
-[1](https://github.com/FranHuzon/Practica_Movimiento_de_datos/blob/master/images/1.png)
+![1](https://github.com/FranHuzon/Practica_Movimiento_de_datos/blob/master/images/1.png)
 
-[2](https://github.com/FranHuzon/Practica_Movimiento_de_datos/blob/master/images/2.png)
+![2](https://github.com/FranHuzon/Practica_Movimiento_de_datos/blob/master/images/2.png)
 
 Vamos a realizar otra vez la exportación la exportación pero excluyendo la tabla SALGRADE y los departamentos sin empleados. Para ello usamos la opción _exclude_ y la opción _query_:
 
-[3](https://github.com/FranHuzon/Practica_Movimiento_de_datos/blob/master/images/3.png)
+![3](https://github.com/FranHuzon/Practica_Movimiento_de_datos/blob/master/images/3.png)
 
-[4](https://github.com/FranHuzon/Practica_Movimiento_de_datos/blob/master/images/4.png)
+![4](https://github.com/FranHuzon/Practica_Movimiento_de_datos/blob/master/images/4.png)
 
