@@ -329,9 +329,10 @@ CentOS7 	| Cent Os
 SQL> 
 ~~~
 
-Respecto a los fichero de configuración todos tienen la misma estructura y es la siguiente:
 
-# controlfile
+
+### controlfile
+Respecto a los ficheros de configuración todos tienen la misma estructura y es la siguiente:
 
 - LOAD DATA: Indica el comienzo de la declaración de inserción de datos.
 - INSERT: Indica la acción a realizar, en nuestro caso la sentencia INSERT.
