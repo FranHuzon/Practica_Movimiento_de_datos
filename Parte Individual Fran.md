@@ -71,7 +71,7 @@ Partimos de una base de datos postgresql con un usuario 'fran' y una base de dat
 
 Realizamos la exportación con la herramienta _pg\_dump_:
 
-![9](https://github.com/FranHuzon/Practica_Movimiento_de_datos/blob/master/images/9.png)
+![9-2](https://github.com/FranHuzon/Practica_Movimiento_de_datos/blob/master/images/9-2.png)
 
 Contenido del fichero _exp\_ordenadores.sql_:
 
