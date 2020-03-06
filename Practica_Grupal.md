@@ -111,7 +111,13 @@ Fichero versionesso:
 
 Comprobación de los ficheros:
 
+### controlfile
+Respecto a los ficheros de configuración todos tienen la misma estructura y es la siguiente:
 
+- LOAD DATA: Indica el comienzo de la declaración de inserción de datos.
+- INSERT: Indica la acción a realizar, en nuestro caso la sentencia INSERT.
+- INTO TABLE: Se especifica los campos que va a tener la tabla.
+- TERMINATED BY: Indica el carácter delimitador para definir los cmapos de la tabla.
 
 Ahora nos vamos a nuestro equipo con oracle, donde debemos crear un fichero de control por cada tabla. Sería algo parecido a lo siguiente:
 
@@ -150,6 +156,9 @@ Nombre CHAR TERMINATED BY 'chr(10)'
 )
 ~~~
 
+### datafile
+
+Contiene los datos a importar de la tabla que previamente se ha exportado.
 Realizamos la importación en la base de datos oracle:
 
 - Tabla Servicios:
@@ -328,20 +337,6 @@ CentOS7 	| Cent Os
 
 SQL> 
 ~~~
-
-
-
-### controlfile
-Respecto a los ficheros de configuración todos tienen la misma estructura y es la siguiente:
-
-- LOAD DATA: Indica el comienzo de la declaración de inserción de datos.
-- INSERT: Indica la acción a realizar, en nuestro caso la sentencia INSERT.
-- INTO TABLE: Se especifica los campos que va a tener la tabla.
-- TERMINATED BY: Indica el carácter delimitador para definir los cmapos de la tabla.
-
-### datafile
-
-Contiene los datos a importar de la tabla que previamente se ha exportado.
 
 ### logfile
 Estos ficheros muestran información de las acciones que se han ido haciendo durante el proceso de importación, como por ejemplo, nombre del controlfile, nombre del datafile, la estructura de la tabla importada, número de errores producidos y su causa, el tiempo que ha tardado en realizar la acción, así como otros datos.
