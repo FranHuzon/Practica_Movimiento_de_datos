@@ -328,3 +328,140 @@ CentOS7 	| Cent Os
 
 SQL> 
 ~~~
+
+Respecto a los fichero de configuración todos tienen la misma estructura y es la siguiente:
+
+# controlfile
+
+- LOAD DATA: Indica el comienzo de la declaración de inserción de datos.
+- INSERT: Indica la acción a realizar, en nuestro caso la sentencia INSERT.
+- INTO TABLE: Se especifica los campos que va a tener la tabla.
+- TERMINATED BY: Indica el carácter delimitador para definir los cmapos de la tabla.
+
+# datafile
+
+Contiene los datos a importar de la tabla que previamente se ha exportado.
+
+# logfile
+
+Aquí tenemos los 3 ficheros de logs que hemos generado:
+
+~~~
+## logs/servicios.log
+SQL*Loader: Release 12.1.0.2.0 - Production on Jue Mar 5 20:06:38 2020
+Copyright (c) 1982, 2014, Oracle and/or its affiliates.  All rights reserved.
+Archivo de Control:   control_files/servicios.ctl
+Archivo de Datos:      datos/servicios.dat
+  Archivo de Errores:     control_files/servicios.bad
+  Desechar Archivo: exportacion_postgre.bad 
+ (Permitir todos los registros desechados)
+Número a cargar: ALL
+Número que omitir: 0
+Errores permitidos: 50
+Matriz de enlace:     64 filas, máximo de 256000 bytes
+Continuación:    ninguno especificado
+Ruta de acceso utilizada:      Convencional
+Tabla SERVICIOS, cargada de cada registro lógico.
+Opción INSERT activa para esta tabla: INSERT
+   Nombre Columna                  Posición   Long  Term Entorno Tipo de Dato
+------------------------------ ---------- ----- ---- ---- ---------------------
+NOMBRE                              FIRST     *   ,       CHARACTER            
+DESCRIPCION                          NEXT     *           CHARACTER            
+    Cadena de terminador: 'chr(10)'
+Tabla SERVICIOS:
+  7 Filas se ha cargado correctamente.
+  0 Filas no cargada debido a errores de datos.
+  0 Filas no cargada porque todas las cláusulas WHEN han fallado.
+  0 Filas no cargada porque todos los campos eran nulos.
+Espacio asignado a matriz de enlace:            33024 bytes (64 filas)
+Bytes de buffer de lectura: 1048576
+Total de registros lógicos ignorados:          0
+Total de registros lógicos leídos:           7
+Total de registros lógicos rechazados:         0
+Total de registros lógicos desechados:        0
+La ejecución empezó en Jue Mar 05 20:06:38 2020
+La ejecución terminó en Jue Mar 05 20:06:38 2020
+Tiempo transcurrido:     00:00:00.05
+Tiempo de CPU:         00:00:00.02
+
+
+## logs/usuarios.log
+SQL*Loader: Release 12.1.0.2.0 - Production on Jue Mar 5 20:02:50 2020
+Copyright (c) 1982, 2014, Oracle and/or its affiliates.  All rights reserved.
+Archivo de Control:   control_files/usuarios.ctl
+Archivo de Datos:      datos/usuarios.dat
+  Archivo de Errores:     control_files/usuarios.bad
+  Desechar Archivo: exportacion_postgre.bad 
+ (Permitir todos los registros desechados)
+Número a cargar: ALL
+Número que omitir: 0
+Errores permitidos: 50
+Matriz de enlace:     64 filas, máximo de 256000 bytes
+Continuación:    ninguno especificado
+Ruta de acceso utilizada:      Convencional
+Tabla USUARIOS, cargada de cada registro lógico.
+Opción INSERT activa para esta tabla: INSERT
+   Nombre Columna                  Posición   Long  Term Entorno Tipo de Dato
+------------------------------ ---------- ----- ---- ---- ---------------------
+NOMBRE                              FIRST     *   ,       CHARACTER            
+CONTRASENA                           NEXT     *   ,       CHARACTER            
+NOMBREREAL                           NEXT     *   ,       CHARACTER            
+APELLIDOS                            NEXT     *   ,       CHARACTER            
+CORREOELECTRONICO                    NEXT     *   ,       CHARACTER            
+CIUDAD                               NEXT     *           CHARACTER            
+    Cadena de terminador: 'chr(10)'
+Tabla USUARIOS:
+  7 Filas se ha cargado correctamente.
+  0 Filas no cargada debido a errores de datos.
+  0 Filas no cargada porque todas las cláusulas WHEN han fallado.
+  0 Filas no cargada porque todos los campos eran nulos.
+Espacio asignado a matriz de enlace:            99072 bytes (64 filas)
+Bytes de buffer de lectura: 1048576
+Total de registros lógicos ignorados:          0
+Total de registros lógicos leídos:           7
+Total de registros lógicos rechazados:         0
+Total de registros lógicos desechados:        0
+La ejecución empezó en Jue Mar 05 20:02:50 2020
+La ejecución terminó en Jue Mar 05 20:02:50 2020
+Tiempo transcurrido:     00:00:00.09
+Tiempo de CPU:         00:00:00.03
+
+## logs/versionesso.log
+SQL*Loader: Release 12.1.0.2.0 - Production on Jue Mar 5 20:08:58 2020
+Copyright (c) 1982, 2014, Oracle and/or its affiliates.  All rights reserved.
+Archivo de Control:   control_files/versionesso.ctl
+Archivo de Datos:      datos/versionesso.dat
+  Archivo de Errores:     control_files/versionesso.bad
+  Desechar Archivo: exportacion_postgre.bad 
+ (Permitir todos los registros desechados)
+Número a cargar: ALL
+Número que omitir: 0
+Errores permitidos: 50
+Matriz de enlace:     64 filas, máximo de 256000 bytes
+Continuación:    ninguno especificado
+Ruta de acceso utilizada:      Convencional
+Tabla VERSIONESSO, cargada de cada registro lógico.
+Opción INSERT activa para esta tabla: INSERT
+   Nombre Columna                  Posición   Long  Term Entorno Tipo de Dato
+------------------------------ ---------- ----- ---- ---- ---------------------
+CODIGO                              FIRST     *   ,       CHARACTER            
+NOMBRE                               NEXT     *           CHARACTER            
+    Cadena de terminador: 'chr(10)'
+Tabla VERSIONESSO:
+  10 Filas se ha cargado correctamente.
+  0 Filas no cargada debido a errores de datos.
+  0 Filas no cargada porque todas las cláusulas WHEN han fallado.
+  0 Filas no cargada porque todos los campos eran nulos.
+Espacio asignado a matriz de enlace:            33024 bytes (64 filas)
+Bytes de buffer de lectura: 1048576
+Total de registros lógicos ignorados:          0
+Total de registros lógicos leídos:          10
+Total de registros lógicos rechazados:         0
+Total de registros lógicos desechados:        0
+La ejecución empezó en Jue Mar 05 20:08:58 2020
+La ejecución terminó en Jue Mar 05 20:08:58 2020
+Tiempo transcurrido:     00:00:00.07
+Tiempo de CPU:         00:00:00.02
+~~~
+
+Estos ficheros muestran información de las acciones que se han ido haciendo durante el proceso de importación, como por ejemplo, nombre del controlfile, nombre del datafile, la estructura de la tabla importada, número de errores producidos y su causa, el tiempo que ha tardado en realizar la acción, así como otros datos.
