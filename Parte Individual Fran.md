@@ -35,7 +35,7 @@ Vamos a realizar otra vez la exportación la exportación pero excluyendo la tab
 
 ![4](https://github.com/FranHuzon/Practica_Movimiento_de_datos/blob/master/images/4.png)
 
-PAra programar la exportación he optado por una tarea crontab muy sencilla. Creamos un scrip con el siguiente contenido:
+Para programar la exportación he optado por una tarea crontab muy sencilla. Creamos un scrip con el siguiente contenido:
 
 ~~~
 #!/bin/bash
@@ -71,7 +71,7 @@ Partimos de una base de datos postgresql con un usuario 'fran' y una base de dat
 
 Realizamos la exportación con la herramienta _pg\_dump_:
 
-![5](https://github.com/FranHuzon/Practica_Movimiento_de_datos/blob/master/images/5.png)
+![9](https://github.com/FranHuzon/Practica_Movimiento_de_datos/blob/master/images/9.png)
 
 Contenido del fichero _exp\_ordenadores.sql_:
 
