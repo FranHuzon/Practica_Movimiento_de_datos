@@ -339,11 +339,11 @@ Respecto a los ficheros de configuración todos tienen la misma estructura y es 
 - INTO TABLE: Se especifica los campos que va a tener la tabla.
 - TERMINATED BY: Indica el carácter delimitador para definir los cmapos de la tabla.
 
-# datafile
+### datafile
 
 Contiene los datos a importar de la tabla que previamente se ha exportado.
 
-# logfile
+### logfile
 
 Aquí tenemos los 3 ficheros de logs que hemos generado:
 
